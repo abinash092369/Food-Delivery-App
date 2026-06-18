@@ -1,0 +1,193 @@
+spring:
+  application:
+    name: eets-backend
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    admin:
+      auto-create: ${SPRING_KAFKA_ADMIN_AUTO_CREATE:false}
+      properties:
+        request.timeout.ms: 2000
+        default.api.timeout.ms: 2000
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      transaction-id-prefix: tx-
+      acks: all
+      properties:
+        enable.idempotence: true
+    consumer:
+      group-id: eets-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.trusted.packages: "com.eets.dto.event,com.eets.dto.response"
+        spring.json.value.default.type: java.lang.Object
+    listener:
+      ack-mode: record
+      auto-startup: ${SPRING_KAFKA_LISTENER_AUTO_STARTUP:false}
+  datasource:
+    url: ${DATABASE_URL:${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/eets_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}}
+    username: ${DATABASE_USERNAME:${SPRING_DATASOURCE_USERNAME:root}}
+    password: ${DATABASE_PASSWORD:${SPRING_DATASOURCE_PASSWORD:your_db_password}}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQLDialect
+      hibernate.format_sql: true
+      hibernate.jdbc.time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    baseline-version: 0
+    validate-on-migrate: true
+    out-of-order: false
+  elasticsearch:
+    uris: ${ELASTICSEARCH_URL:${SPRING_ELASTICSEARCH_URIS:http://localhost:9200}}
+    socket-timeout: 5000ms
+    connection-timeout: 5000ms
+  thymeleaf:
+    check-template-location: false
+  data:
+    redis:
+      host: ${REDIS_HOST:${SPRING_REDIS_HOST:localhost}}
+      port: ${REDIS_PORT:${SPRING_REDIS_PORT:6379}}
+      password: ${REDIS_PASSWORD:${SPRING_REDIS_PASSWORD:your_redis_password}}
+      repositories:
+        enabled: false
+  mail:
+    host: ${SPRING_MAIL_HOST:smtp.gmail.com}
+    port: ${SPRING_MAIL_PORT:587}
+    username: ${SPRING_MAIL_USERNAME:}
+    password: ${SPRING_MAIL_PASSWORD:}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 50MB
+
+server:
+  port: ${PORT:8080}
+  forward-headers-strategy: framework
+
+jwt:
+  secret: ${JWT_SECRET:your_jwt_secret_must_be_at_least_256_bits_long_hex_or_string_value_here_to_be_secure}
+  access-token-expiry: 900000
+  refresh-token-expiry: 604800000
+
+twilio:
+  account-sid: ${TWILIO_ACCOUNT_SID:AC_your_twilio_account_sid}
+  auth-token: ${TWILIO_AUTH_TOKEN:your_twilio_auth_token}
+  verify-service-sid: ${TWILIO_VERIFY_SERVICE_SID:VA_your_twilio_verify_service_sid}
+
+razorpay:
+  key-id: ${RAZORPAY_KEY_ID:rzp_test_your_razorpay_key_id}
+  key-secret: ${RAZORPAY_KEY_SECRET:your_razorpay_key_secret}
+
+cloudinary:
+  cloud-name: ${CLOUDINARY_CLOUD_NAME:your_cloudinary_cloud_name}
+  api-key: ${CLOUDINARY_API_KEY:your_cloudinary_api_key}
+  api-secret: ${CLOUDINARY_API_SECRET:your_cloudinary_api_secret}
+
+firebase:
+  # Path to Firebase service account JSON.
+  # Supports:
+  #   1. Classpath resource (file placed in src/main/resources):
+  #      service-account-path: food-delivery-eets-firebase-adminsdk-fbsvc-9a97924a0e.json
+  #   2. Absolute filesystem path (for production secrets):
+  #      service-account-path: /etc/secrets/firebase-service-account.json
+  service-account-path: ${FIREBASE_SERVICE_ACCOUNT_PATH:food-delivery-eets-firebase-adminsdk-fbsvc-9a97924a0e.json}
+  # Set to false to disable Firebase entirely (e.g., local dev without credentials)
+  enabled: true
+
+eets:
+  kafka:
+    enabled: ${EETS_KAFKA_ENABLED:false}
+  frontend-urls:
+    customer: ${FRONTEND_CUSTOMER_URL:http://localhost:5173}
+    admin: ${FRONTEND_ADMIN_URL:http://localhost:5174}
+    vendor: ${FRONTEND_VENDOR_URL:http://localhost:5175}
+    driver: ${FRONTEND_DRIVER_URL:http://localhost:5176}
+  delivery:
+    search-radius-km: 5
+    average-speed-kmh: 30
+    assignment-retry-interval-min: 2
+    max-assignment-retries: 5
+    default-restaurant-radius-km: 5.0
+    default-driver-operating-radius-km: 10.0
+    max-nearby-drivers: 10
+  fraud:
+    check-interval-cron: "0 */15 * * * *"
+    thresholds:
+      max-orders-short-time: 5
+      short-time-minutes: 10
+      max-accounts-per-coupon: 3
+      max-coupon-cancellations: 3
+      max-driver-speed-kmh: 120.0
+      max-delivery-delay-minutes: 45
+      max-driver-rejections: 5
+      max-failed-payments-hour: 3
+      high-risk-transaction-amount: 10000.00
+  commission:
+    vendor-rate: 0.18
+    driver-base-fee: 30
+    driver-per-km: 5
+  free-delivery-threshold: 500
+
+google:
+  maps:
+    api-key: ${GOOGLE_MAPS_API_KEY:mock-api-key}
+    distance-matrix-url: https://maps.googleapis.com/maps/api/distancematrix/json
+    directions-url: https://maps.googleapis.com/maps/api/directions/json
+    timeout-ms: 5000
+    cache-ttl-minutes: 1440
+
+resilience4j:
+  retry:
+    instances:
+      googleMaps:
+        maxAttempts: 3
+        waitDuration: 500ms
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2
+  circuitbreaker:
+    instances:
+      googleMaps:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        slowCallRateThreshold: 50
+        slowCallDurationThreshold: 3000ms
+        waitDurationInOpenState: 10000ms
+        permittedNumberOfCallsInHalfOpenState: 3
+  ratelimiter:
+    instances:
+      googleMaps:
+        limitForPeriod: 50
+        limitRefreshPeriod: 1s
+        timeoutDuration: 1s
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info"
+
+logging:
+  level:
+    org.apache.kafka.clients.NetworkClient: ERROR

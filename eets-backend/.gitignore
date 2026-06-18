@@ -1,0 +1,11 @@
+target/
+.idea/
+.vscode/
+logs/
+uploads/
+*.log
+application-local.yml
+secrets/
+.env
+food-delivery-eets-firebase-adminsdk-*.json
+

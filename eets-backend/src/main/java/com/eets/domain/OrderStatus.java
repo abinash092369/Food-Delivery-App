@@ -1,0 +1,2 @@
+package com.eets.domain;
+public enum OrderStatus { PLACED, ACCEPTED, PREPARING, PACKED, PICKED_UP, ON_THE_WAY, DELIVERED, CANCELLED, REFUNDED }
