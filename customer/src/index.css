@@ -1,0 +1,776 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-family: 'Inter', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', sans-serif;
+  color: #0f172a;
+}
+
+/* Premium Glassmorphism utility */
+.bg-glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.bg-glass-dark {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Modern hover lift effect */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px -8px rgba(13, 148, 136, 0.12), 0 4px 12px -2px rgba(13, 148, 136, 0.06);
+}
+
+/* Floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Pulsing ambient glow */
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(1.15);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 10s ease-in-out infinite;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  z-index: 10;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ==========================================================================
+   EETS Premium 3D Splash Screen Animations (Light Luxury Food-Tech)
+   ========================================================================== */
+
+@keyframes meshMove {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    background-position: 100% 50%;
+    transform: translate(-1%, 1%) scale(1.02);
+  }
+}
+
+.animate-mesh-move {
+  animation: meshMove 20s ease-in-out infinite;
+}
+
+@keyframes ambientFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+  }
+
+  33% {
+    transform: translateY(-20px) translateX(15px) scale(1.08);
+  }
+
+  66% {
+    transform: translateY(15px) translateX(-20px) scale(0.95);
+  }
+}
+
+.animate-ambient-float-1 {
+  animation: ambientFloat 12s ease-in-out infinite;
+}
+
+.animate-ambient-float-2 {
+  animation: ambientFloat 12s ease-in-out infinite 3s reverse;
+}
+
+.animate-ambient-float-3 {
+  animation: ambientFloat 12s ease-in-out infinite 6s;
+}
+
+.animate-ambient-float-4 {
+  animation: ambientFloat 12s ease-in-out infinite 9s reverse;
+}
+
+.bg-grid {
+  background-size: 50px 50px;
+  background-image:
+    linear-gradient(to right, rgba(20, 217, 213, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 217, 213, 0.02) 1px, transparent 1px);
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.012;
+}
+
+/* 3D Cube / Card and Logo reveal */
+.logo-3d-card {
+  transform-style: preserve-3d;
+  perspective: 1200px;
+}
+
+@keyframes logoEntranceCinematic {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotateY(90deg);
+    filter: blur(8px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.1) rotateY(-10deg);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+  }
+}
+
+.animate-logo-entrance {
+  animation: logoEntranceCinematic 1.0s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.7s;
+  opacity: 0;
+}
+
+@keyframes logo3DFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotateX(7deg) rotateY(-7deg);
+    box-shadow:
+      0 15px 35px rgba(20, 217, 211, 0.15),
+      0 0 25px rgba(20, 217, 211, 0.1);
+  }
+
+  50% {
+    transform: translateY(-8px) rotateX(-5deg) rotateY(5deg);
+    box-shadow:
+      0 25px 45px rgba(20, 217, 211, 0.22),
+      0 0 35px rgba(20, 217, 211, 0.2);
+  }
+}
+
+.animate-logo-3d {
+  animation: logo3DFloat 5s ease-in-out infinite 1.7s;
+}
+
+@keyframes shineSweep {
+  0% {
+    left: -150%;
+  }
+
+  50%,
+  100% {
+    left: 250%;
+  }
+}
+
+.glass-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.15) 30%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0.15) 70%,
+      rgba(255, 255, 255, 0) 100%);
+  transform: skewX(-30deg);
+  animation: shineSweep 4s infinite ease-in-out 1.7s;
+}
+
+/* Orbiting rings and pulse waves */
+@keyframes pulseEnergy {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.25;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.5;
+  }
+}
+
+.animate-ring-pulse {
+  animation: pulseEnergy 2s ease-in-out infinite 1.0s;
+}
+
+@keyframes particleOrbit {
+  0% {
+    transform: rotate(0deg) translateX(var(--tw-particle-dist, 80px)) scale(1);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.8;
+  }
+
+  80% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: rotate(360deg) translateX(var(--tw-particle-dist, 80px)) scale(0.3);
+    opacity: 0;
+  }
+}
+
+.animate-particle-orbit {
+  animation: particleOrbit var(--tw-particle-dur, 6s) linear infinite 1.2s;
+  opacity: 0;
+}
+
+/* Food showcases sliding in */
+@keyframes foodSlideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-150px) scale(0.8);
+    filter: blur(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes foodSlideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(150px) scale(0.8);
+    filter: blur(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.animate-slide-in-left {
+  animation: foodSlideInLeft 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
+  opacity: 0;
+}
+
+.animate-slide-in-right {
+  animation: foodSlideInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
+  opacity: 0;
+}
+
+@keyframes floatFoodLeft {
+  0% {
+    transform: translateY(0px) rotate(-1.5deg);
+  }
+
+  100% {
+    transform: translateY(-12px) rotate(1.5deg);
+  }
+}
+
+@keyframes floatFoodRight {
+  0% {
+    transform: translateY(0px) rotate(1.5deg);
+  }
+
+  100% {
+    transform: translateY(12px) rotate(-1.5deg);
+  }
+}
+
+.animate-food-left {
+  animation: floatFoodLeft 4s ease-in-out infinite alternate 1.6s;
+}
+
+.animate-food-right {
+  animation: floatFoodRight 4s ease-in-out infinite alternate-reverse 1.6s;
+}
+
+/* Text entrance and shimmer styles */
+@keyframes letterReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(25px) rotateX(90deg);
+    filter: blur(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+    filter: blur(0);
+  }
+}
+
+.letter-reveal {
+  display: inline-block;
+  opacity: 0;
+  transform-origin: bottom center;
+  animation: letterReveal 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes shineSweepText {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-shine-sweep {
+  background-size: 200% auto;
+  animation: shineSweepText 4s linear infinite 1.8s;
+}
+
+.text-3d-premium-glow {
+  color: #e0fdfa;
+  text-shadow:
+    0 1px 0 #2dd4bf,
+    0 2px 0 #14b8a6,
+    0 3px 0 #0d9488,
+    0 4px 0 #0f766e,
+    0 5px 0 #115e59,
+    0 6px 0 #134e4a,
+    0 7px 0 #0f3e3b,
+    0 8px 12px rgba(15, 118, 110, 0.45),
+    0 0 20px rgba(45, 212, 191, 0.4),
+    0 0 40px rgba(45, 212, 191, 0.2);
+}
+
+/* Tagline Entrance */
+@keyframes taglineFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-tagline-fade-up {
+  animation: taglineFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.8s;
+  opacity: 0;
+}
+
+/* Bottom delivery tracking looping */
+@keyframes routeFillInfinite {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes riderProgressInfinite {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  95% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes riderBounceCinematic {
+
+  0%,
+  100% {
+    transform: translateY(-50%) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-56%) rotate(-4deg);
+  }
+}
+
+.animate-route-infinite {
+  animation: routeFillInfinite 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite 2.0s;
+}
+
+.animate-rider-infinite {
+  animation: riderProgressInfinite 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite 2.0s;
+  opacity: 0;
+}
+
+.animate-rider-bounce-cinematic {
+  animation: riderBounceCinematic 0.4s ease-in-out infinite;
+}
+
+/* Jump Dots */
+@keyframes jumpDot {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-jump-dot-1 {
+  animation: jumpDot 0.6s ease-in-out infinite;
+}
+
+.animate-jump-dot-2 {
+  animation: jumpDot 0.6s ease-in-out infinite 0.15s;
+}
+
+.animate-jump-dot-3 {
+  animation: jumpDot 0.6s ease-in-out infinite 0.3s;
+}
+
+/* Micro ambient food icon floating */
+@keyframes ambientFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-15px) rotate(12deg);
+  }
+}
+
+.animate-ambient-float-1 {
+  animation: ambientFloat 8s ease-in-out infinite;
+}
+
+.animate-ambient-float-2 {
+  animation: ambientFloat 11s ease-in-out infinite 1.5s;
+}
+
+.animate-ambient-float-3 {
+  animation: ambientFloat 9s ease-in-out infinite 3.0s;
+}
+
+.animate-ambient-float-4 {
+  animation: ambientFloat 13s ease-in-out infinite 0.5s;
+}
+
+.animate-ambient-float-5 {
+  animation: ambientFloat 10s ease-in-out infinite 2.0s;
+}
+
+/* Light Sweep Overlay */
+@keyframes lightSweepOverlay {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-light-sweep {
+  animation: lightSweepOverlay 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards 2.7s;
+}
+
+/* Vector Corner Waves */
+@keyframes wavePulse {
+
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(1.02);
+  }
+}
+
+.animate-wave-pulse {
+  animation: wavePulse 6s ease-in-out infinite;
+}
+
+/* Floating food item classes */
+.floating-pizza {
+  animation: floatPizza 7s ease-in-out infinite alternate;
+  filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.15));
+}
+.floating-burger {
+  animation: floatBurger 8s ease-in-out infinite alternate;
+  filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.15));
+}
+.floating-fries {
+  animation: floatFries 6s ease-in-out infinite alternate;
+  filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.15));
+}
+
+@keyframes floatPizza {
+  0% {
+    transform: translateY(0px) rotate(-15deg) scale(1);
+  }
+  100% {
+    transform: translateY(-12px) rotate(-10deg) scale(1.03);
+  }
+}
+
+@keyframes floatBurger {
+  0% {
+    transform: translateY(0px) rotate(15deg) scale(1);
+  }
+  100% {
+    transform: translateY(-15px) rotate(20deg) scale(1.03);
+  }
+}
+
+@keyframes floatFries {
+  0% {
+    transform: translateY(0px) rotate(5deg) scale(1);
+  }
+  100% {
+    transform: translateY(-10px) rotate(-5deg) scale(1.02);
+  }
+}
+
+/* Neon glow rings around lateral plates */
+.glow-ring-teal {
+  box-shadow: 0 0 35px 8px rgba(20, 217, 213, 0.28), inset 0 0 25px 4px rgba(20, 217, 213, 0.18);
+  border: 3px solid rgba(255, 255, 255, 0.45);
+}
+
+/* Cinematic Dissolve Page Transition */
+@keyframes cinematicDissolve {
+  0% {
+    opacity: 1;
+    filter: blur(8px);
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(20px);
+    transform: scale(1.03);
+    pointer-events: none;
+  }
+}
+
+.animate-cinematic-dissolve {
+  animation: cinematicDissolve 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+
+@keyframes simpleFadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes simpleFadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Custom Hero Animation Classes */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fadeUp {
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(1.5deg);
+  }
+}
+.floatSlow {
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+@keyframes pulseGlowCustom {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+.pulseGlow {
+  animation: pulseGlowCustom 8s ease-in-out infinite;
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.slideInLeft {
+  animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.slideInRight {
+  animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes shimmerText {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+.shimmerText {
+  background-size: 200% auto;
+  animation: shimmerText 5s linear infinite;
+}
+
+.hoverLift {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+.hoverLift:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 20px 40px -10px rgba(20, 217, 213, 0.25) !important;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
